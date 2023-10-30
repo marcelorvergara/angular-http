@@ -21,18 +21,15 @@ export class PostService {
   }
 
   fetchPost() {
-    this.http
-    .get<{[key: string]: Post}>('https://fqm-dsv-default-rtdb.firebaseio.com/posts.json')
-    .pipe(map(responseData => {
-      const postsArray: Post[] = []
-      for (const key in responseData) {
-        if (responseData.hasOwnProperty(key)) {
-          postsArray.push({ ...responseData[key], id: key})}
-      }
-      return postsArray
-    }))
-    .subscribe(posts => {
-
-    })
+    return this.http
+      .get<{[key: string]: Post}>('https://fqm-dsv-default-rtdb.firebaseio.com/posts.json')
+      .pipe(map(responseData => {
+        const postsArray: Post[] = []
+        for (const key in responseData) {
+          if (responseData.hasOwnProperty(key)) {
+            postsArray.push({ ...responseData[key], id: key})}
+        }
+        return postsArray
+      }))
   }
 }
