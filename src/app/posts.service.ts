@@ -32,4 +32,9 @@ export class PostService {
         return postsArray
       }))
   }
+
+  deletePosts() {
+    return this.http
+      .delete('https://fqm-dsv-default-rtdb.firebaseio.com/posts.json')
+  }
 }
