@@ -9,7 +9,9 @@ import { Post } from './post.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+
   loadedPosts: Post[] = [];
+  isFetching = false;
 
   constructor(private http: HttpClient) {}
 
@@ -38,6 +40,7 @@ export class AppComponent implements OnInit {
   }
 
   private fetchPosts() {
+    this.isFetching = true
     this.http
     .get<{[key: string]: Post}>('https://fqm-dsv-default-rtdb.firebaseio.com/posts.json')
     .pipe(map(responseData => {
@@ -50,7 +53,7 @@ export class AppComponent implements OnInit {
     }))
     .subscribe(posts => {
       this.loadedPosts = posts
-      console.log(posts)
+      this.isFetching = false
     })
   }
 }
