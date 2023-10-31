@@ -45,12 +45,18 @@ export class AppComponent implements OnInit, OnDestroy {
     }, error => {
       // Handling error
       this.error = error.message
+      this.isFetching = false
     })
   }
 
   onClearPosts() {
     // Send Http request
     this.postService.deletePosts().subscribe(() => this.loadedPosts = [])
+  }
+
+  onHandleError() {
+    this.error = null
+    this.isFetching = false
   }
 
   ngOnDestroy(): void {

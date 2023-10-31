@@ -1,8 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Post } from "./post.model";
-import { map } from "rxjs/operators";
-import { Subject } from "rxjs";
+import { map, catchError } from "rxjs/operators";
+import { Subject, throwError } from "rxjs";
 
 
 @Injectable({providedIn: 'root'})
@@ -35,7 +35,12 @@ export class PostService {
             postsArray.push({ ...responseData[key], id: key})}
         }
         return postsArray
-      }))
+      },
+      catchError(errorRes => {
+        // Send analytcs server
+        return throwError(errorRes)
+      })
+      ))
   }
 
   deletePosts() {
