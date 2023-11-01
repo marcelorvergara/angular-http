@@ -28,6 +28,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }, error => {
       // Handling error
       this.error = error.message
+      this.isFetching = false
     })
   }
 

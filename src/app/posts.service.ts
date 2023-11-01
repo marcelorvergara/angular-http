@@ -36,7 +36,8 @@ export class PostService {
       .get<{[key: string]: Post}>('https://fqm-dsv-default-rtdb.firebaseio.com/posts.json',
         {
           headers: new HttpHeaders({"Custom-Header" : "Hello"}),
-          params: searchParams
+          params: searchParams,
+          responseType: 'json'
         }
       )
       .pipe(map(responseData => {
@@ -58,7 +59,8 @@ export class PostService {
     return this.http
       .delete('https://fqm-dsv-default-rtdb.firebaseio.com/posts.json',
       {
-        observe: 'events'
+        observe: 'events',
+        responseType: 'text'
       })
       .pipe(tap(event => {
         console.log(event)
